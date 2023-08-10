@@ -1,0 +1,51 @@
+<h1>Task 7 related to fetch data from api and use modal</h1>
+<div class="container">
+  <table border="1px">
+      <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Body</th>
+      </tr>
+      <tr *ngFor="let user of store |paginate:{itemsPerPage:count, currentPage:page}">
+          <td>{{user.id}}</td>
+          <td>{{user.title}}</td>
+          <td>{{user.body}}</td>
+          <td><button type="button" class="btn btn-info btn-lg" (click)="openModal(user)">add</button></td>
+      </tr>
+  </table>
+  <div class="pagination" >
+      <pagination-controls (pageChange)="page=$event"></pagination-controls>
+  </div> 
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': display}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add row to new table</h4>
+        <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <p>Do you really want to add?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="onConfirm()">Confirm</button>
+        <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <table border="1px" *ngIf="result.length!=0">
+      <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Body</th>
+      </tr>
+      <tr *ngFor="let user of result ">
+          <td>{{user.id}}</td>
+          <td>{{user.title}}</td>
+          <td>{{user.body}}</td>
+      </tr>
+  </table>
+  </div>
